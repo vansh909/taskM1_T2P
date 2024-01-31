@@ -1,0 +1,37 @@
+const int motionSensorPin = 4; 
+const int buttonPin =2;
+
+void setup() {
+  Serial.begin(9600);  
+  pinMode(motionSensorPin, INPUT);  
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(buttonPin), buttton, CHANGE);
+}
+
+void loop() {
+  int motionState = digitalRead(motionSensorPin); 
+  int buttonStatus = digitalRead(buttonPin);
+
+  if (motionState == HIGH) {
+    Serial.println("Motion is detected!");
+    digitalWrite(LED_BUILTIN, HIGH);  
+  } else {
+    Serial.println("No motion is detected.");
+    digitalWrite(LED_BUILTIN, LOW);  
+  }
+
+  delay(1000);  
+}
+
+void buttton()
+{
+  int buttonStatuss = digitalRead(buttonPin);
+    if(buttonStatuss == HIGH)
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else{
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+}
